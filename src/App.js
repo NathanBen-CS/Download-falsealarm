@@ -7,7 +7,7 @@ import useFetch from "./useFetch";
 const ZIP_FILE_URL = 'http://localhost:3000/FalseAlarm.zip';
 
 function App() {
-  const { data: reviews, isPending, error1, } = useFetch('http://localhost:8000/comments');
+  const { data: reviews, isPending, error1, } = useFetch('https://falsealarm-reviews-api.vercel.app/comments');
 
   const [visibleReviews, setVisibleReviews] = useState(10); // Initially display 3 reviews
 
@@ -23,6 +23,9 @@ function App() {
     aTag.click();
     aTag.remove();
   }
+
+
+//npx json-server --watch db.json --port 8000
 
   return (
     <div className='appWrapper'>
