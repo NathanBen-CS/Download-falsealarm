@@ -1,6 +1,10 @@
+.appWrapper{
+  background-color:#F0D2D1;
+}
+
 .app{
   width: auto;
-  height: 100vh;
+  height: auto;
   background-color: rgb(130, 195, 255);
   display: flex;
   text-align: center;
@@ -32,6 +36,7 @@
   padding: 20px, 40px;
   border: solid;
   border-width: 1px;
+  margin-bottom: 50px;
 }
 
 .app button:hover{
@@ -39,4 +44,48 @@
   background-color: transparent;
   color: white;
   border-width: 1px;
+}
+
+.reviews {
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.reviews h2 {
+  color: #000000; /* Dark blue */
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 100;
+  font-size: 2.2em;
+}
+
+.reviews h3 {
+  color: #001f3f; /* Navy blue */
+  margin: 10px 0;
+}
+
+.reviews b {
+  color: #000000; /* Gold for rating */
+  font-size: 1.2em;
+}
+
+.reviews p {
+  color: #333; /* Dark gray for comments */
+  background-color: #ffffff; /* White background for comments */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+.reviews div {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-radius: 1px;
+  transition: transform 0.2s;
 }
