@@ -89,3 +89,16 @@
   border-radius: 1px;
   transition: transform 0.2s;
 }
+.reviewForm{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 600px;
+  min-height: 200px;
+  margin: auto;
+}
+
+.reviewForm input{
+  min-height: 30px;
+}
