@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import useFetch from "./useFetch";
 
-const ZIP_FILE_URL = 'http://localhost:3000/FalseAlarm.zip';
+const ZIP_FILE_URL = 'http://download-falsealarm.vercel.app/FalseAlarm.zip';
 
 function App() {
   const { data: reviews, isPending: isPendingReviews, error: errorReviews } = useFetch('https://falsealarm-reviews-api.vercel.app/comments');
