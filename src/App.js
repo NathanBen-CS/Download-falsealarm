@@ -84,6 +84,7 @@ function App() {
         </b>
 
         <button onClick={download}>Download FalseAlarm</button>
+        <button onClick={() => changeDownloadLink('http://download-falsealarm.vercel.app/FalseAlarm.zip')}>Change Download Link</button>
       </div>
       <div className='reviewsWrapper'>
         <div className='reviews'>
