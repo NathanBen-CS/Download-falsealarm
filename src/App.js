@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import useFetch from "./useFetch";
 
-const ZIP_FILE_URL = 'http://download-falsealarm.vercel.app/FalseAlarm.zip';
+const ZIP_FILE_URL = 'http://localhost:3000/FalseAlarm.zip';
 
 function App() {
   const { data: reviews, isPending: isPendingReviews, error: errorReviews } = useFetch('https://falsealarm-reviews-api.vercel.app/comments');
@@ -24,27 +24,21 @@ function App() {
     document.body.appendChild(aTag);
     aTag.click();
     aTag.remove();
-  };
+  }
 
   const createRating = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
-    
-    if (!prefixes || !suffixes) {
-      alert('Data not yet loaded');
-      return;
-    }
-
+  
     const min = 0;
     const maxPrefixes = Math.floor(prefixes.length);
     const maxSuffixes = Math.floor(suffixes.length);
-
-    // Ensure there are prefixes and suffixes available before generating the username
+  
     const randomPrefix = prefixes[Math.floor(Math.random() * (maxPrefixes - min)) + min];
     const randomSuffix = suffixes[Math.floor(Math.random() * (maxSuffixes - min)) + min];
-    const userName = `${randomPrefix}${randomSuffix}_${reviews.length}`; // Correct template literal
+    const userName = `${randomPrefix}${randomSuffix}_${reviews.length}`;
 
     const formData = new FormData(e.target);
-    const stringed = JSON.stringify({
+    const stringed =  JSON.stringify({
       id: reviews.length,
       username: userName,
       rating: parseInt(formData.get('userRating')),
@@ -62,7 +56,7 @@ function App() {
     })
     .then(response => {
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`); // Correct template literal
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
       return response.json();
     })
@@ -73,9 +67,9 @@ function App() {
     })
     .catch(error => {
       console.error('Error:', error);
-      alert(`Failed to submit review: ${error.message}`); // Correct template literal
+      alert(`Failed to submit review: ${error.message}`);
     });
-  };
+  }
 
   return (
     <div className='appWrapper'>
@@ -115,6 +109,7 @@ function App() {
             {reviews && visibleReviews < reviews.length && (
               <button onClick={loadMoreReviews}>Load More</button>
             )}
+            
           </div>
       </div>
     </div>
