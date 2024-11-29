@@ -19,12 +19,12 @@ function App() {
 
   const download = () => {
     const aTag = document.createElement('a');
-    aTag.href = ZIP_FILE_URL;
+    aTag.href = downloadUrl; // Use dynamic URL
     aTag.setAttribute('download', 'FalseAlarm.zip');
     document.body.appendChild(aTag);
     aTag.click();
     aTag.remove();
-  }
+  };
 
   const createRating = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
