@@ -28,17 +28,23 @@ function App() {
 
   const createRating = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
-  
+    
+    if (!prefixes || !suffixes) {
+      alert('Data not yet loaded');
+      return;
+    }
+
     const min = 0;
     const maxPrefixes = Math.floor(prefixes.length);
     const maxSuffixes = Math.floor(suffixes.length);
-  
+
+    // Ensure there are prefixes and suffixes available before generating the username
     const randomPrefix = prefixes[Math.floor(Math.random() * (maxPrefixes - min)) + min];
     const randomSuffix = suffixes[Math.floor(Math.random() * (maxSuffixes - min)) + min];
-    const userName = ${randomPrefix}${randomSuffix}_${reviews.length};
+    const userName = `${randomPrefix}${randomSuffix}_${reviews.length}`; // Correct template literal
 
     const formData = new FormData(e.target);
-    const stringed =  JSON.stringify({
+    const stringed = JSON.stringify({
       id: reviews.length,
       username: userName,
       rating: parseInt(formData.get('userRating')),
@@ -56,7 +62,7 @@ function App() {
     })
     .then(response => {
       if (!response.ok) {
-        throw new Error(HTTP error! Status: ${response.status});
+        throw new Error(`HTTP error! Status: ${response.status}`); // Correct template literal
       }
       return response.json();
     })
@@ -67,9 +73,9 @@ function App() {
     })
     .catch(error => {
       console.error('Error:', error);
-      alert(Failed to submit review: ${error.message});
+      alert(`Failed to submit review: ${error.message}`); // Correct template literal
     });
-  }
+  };
 
   return (
     <div className='appWrapper'>
@@ -109,7 +115,6 @@ function App() {
             {reviews && visibleReviews < reviews.length && (
               <button onClick={loadMoreReviews}>Load More</button>
             )}
-            
           </div>
       </div>
     </div>
