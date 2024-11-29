@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import useFetch from "./useFetch";
 
@@ -12,7 +12,6 @@ function App() {
   const { data: suffixes, isPending: isPendingSuffixes, error: errorSuffixes } = useFetch('https://falsealarm-reviews-api.vercel.app/suffixes');
 
   const [visibleReviews, setVisibleReviews] = useState(10); // Initially display 10 reviews
-  const [downloadUrl, setDownloadUrl] = useState(ZIP_FILE_URL); // State to store dynamic URL
 
   const loadMoreReviews = () => {
     setVisibleReviews((prev) => prev + 20); // Load 20 more reviews
@@ -20,16 +19,12 @@ function App() {
 
   const download = () => {
     const aTag = document.createElement('a');
-    aTag.href = downloadUrl; // Use dynamic URL
+    aTag.href = ZIP_FILE_URL;
     aTag.setAttribute('download', 'FalseAlarm.zip');
     document.body.appendChild(aTag);
     aTag.click();
     aTag.remove();
-  };
-
-  const changeDownloadLink = (newUrl) => {
-    setDownloadUrl(newUrl); // Update the download URL state
-  };
+  }
 
   const createRating = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
@@ -40,7 +35,7 @@ function App() {
   
     const randomPrefix = prefixes[Math.floor(Math.random() * (maxPrefixes - min)) + min];
     const randomSuffix = suffixes[Math.floor(Math.random() * (maxSuffixes - min)) + min];
-    const userName = `${randomPrefix}${randomSuffix}_${reviews.length}`;
+    const userName = ${randomPrefix}${randomSuffix}_${reviews.length};
 
     const formData = new FormData(e.target);
     const stringed =  JSON.stringify({
@@ -61,7 +56,7 @@ function App() {
     })
     .then(response => {
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(HTTP error! Status: ${response.status});
       }
       return response.json();
     })
@@ -72,9 +67,9 @@ function App() {
     })
     .catch(error => {
       console.error('Error:', error);
-      alert(`Failed to submit review: ${error.message}`);
+      alert(Failed to submit review: ${error.message});
     });
-  };
+  }
 
   return (
     <div className='appWrapper'>
@@ -89,8 +84,6 @@ function App() {
         </b>
 
         <button onClick={download}>Download FalseAlarm</button>
-        {/* Example to change download link */}
-        <button onClick={() => changeDownloadLink('http://newdownloadlink.com/FalseAlarm.zip')}>Change Download Link</button>
       </div>
       <div className='reviewsWrapper'>
         <div className='reviews'>
@@ -116,7 +109,8 @@ function App() {
             {reviews && visibleReviews < reviews.length && (
               <button onClick={loadMoreReviews}>Load More</button>
             )}
-        </div>
+            
+          </div>
       </div>
     </div>
   );
