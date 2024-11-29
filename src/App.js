@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 import useFetch from "./useFetch";
 
@@ -12,6 +12,7 @@ function App() {
   const { data: suffixes, isPending: isPendingSuffixes, error: errorSuffixes } = useFetch('https://falsealarm-reviews-api.vercel.app/suffixes');
 
   const [visibleReviews, setVisibleReviews] = useState(10); // Initially display 10 reviews
+  const [downloadUrl, setDownloadUrl] = useState(ZIP_FILE_URL); // State to store dynamic URL
 
   const loadMoreReviews = () => {
     setVisibleReviews((prev) => prev + 20); // Load 20 more reviews
@@ -24,6 +25,10 @@ function App() {
     document.body.appendChild(aTag);
     aTag.click();
     aTag.remove();
+  };
+
+  const changeDownloadLink = (newUrl) => {
+    setDownloadUrl(newUrl); // Update the download URL state
   };
 
   const createRating = (e) => {
@@ -69,7 +74,7 @@ function App() {
       console.error('Error:', error);
       alert(`Failed to submit review: ${error.message}`);
     });
-  }
+  };
 
   return (
     <div className='appWrapper'>
@@ -84,7 +89,8 @@ function App() {
         </b>
 
         <button onClick={download}>Download FalseAlarm</button>
-        <button onClick={() => changeDownloadLink('http://download-falsealarm.vercel.app/FalseAlarm.zip')}>Change Download Link</button>
+        {/* Example to change download link */}
+        <button onClick={() => changeDownloadLink('http://newdownloadlink.com/FalseAlarm.zip')}>Change Download Link</button>
       </div>
       <div className='reviewsWrapper'>
         <div className='reviews'>
@@ -110,8 +116,7 @@ function App() {
             {reviews && visibleReviews < reviews.length && (
               <button onClick={loadMoreReviews}>Load More</button>
             )}
-            
-          </div>
+        </div>
       </div>
     </div>
   );
