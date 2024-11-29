@@ -24,7 +24,7 @@ function App() {
     document.body.appendChild(aTag);
     aTag.click();
     aTag.remove();
-  }
+  };
 
   const createRating = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
